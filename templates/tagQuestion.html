@@ -1,18 +1,5 @@
 {% extends "base.html" %}
-<title>{% block title %}Askme: Tags{% endblock %}</title>
 
-{% block main_menu %}
-<ul class="navbar-nav mr-sm-3">  <!-- move search mr-auto-->
-	<li class="nav-item">
-		<a class="nav-link" href="{% url 'base_questions' %}">Questions<span class="sr-only">(current)</span></a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="{% url 'hot_questions' %}">Hot Questions</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link active" href="{% url 'tag_questions' %}">Tags</a>
-	</li>
-</ul>
-{% endblock %}
+<title>{% block title %}Askme: Tags{% endblock %}</title>
 
 <h3 class="titles-mr">{% block pageName %}Tag: Moon{% endblock %}</h3>

@@ -3,19 +3,8 @@
 
 <title>{% block title %}Ask question{% endblock %}</title>
 
-{% block rightNavbar%}
+{% block rightNavbarImg %}
 <img src="{% static "img/moon.jpg" %}" class="img-resize" alt = "">
-<ul class="navbar-nav">
-	<li class="nav-item">
-		<a class="nav-link" href="#">Dr.House</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="settings">Settings</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="#">Log out</a>
-	</li>
-</ul>
 {% endblock %}
 
 <h3 class="titles-mr">{% block pageName %}New Question{% endblock %}</h3>

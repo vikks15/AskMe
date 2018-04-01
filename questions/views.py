@@ -1,11 +1,13 @@
 from django.shortcuts import render
 
+# Create your views here.
+
 def base(request):
 	return render(request, 'base.html', {
 		'questions': [ ],
 		'header': 'New Questions',
 		})
-	
+
 def hot(request):
 	return render(request, 'index.html', {
 		'questions': [ ],
@@ -41,3 +43,9 @@ def settings(request):
 	return render(request, 'mysettings.html', {
 		'header': 'some text'
 		})
+
+def menu_switch(url):
+	if url == 'base_questions':
+		return true
+	else:
+		return false

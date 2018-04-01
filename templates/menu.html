@@ -1,0 +1,74 @@
+
+<ul class="navbar-nav mr-sm-3">  <!-- move search mr-auto-->
+
+	{% with request.path as the_url %}
+
+	{% if the_url == "/" %}
+	<li class="nav-item active">
+	{% else %}
+	<li class="nav-item">
+	{% endif %}
+		<a class="nav-link" href="{% url 'base_questions' %}">Questions<span class="sr-only">(current)</span></a>
+	</li>
+	
+	{% if the_url == "/hot/" %}
+	<li class="nav-item active">
+	{% else %}
+	<li class="nav-item">
+	{% endif %}
+		<a class="nav-link" href="{% url 'hot_questions' %}">Hot Questions</a>
+	</li>
+
+	{% if the_url == "/tag/" %}
+	<li class="nav-item active">
+	{% else %}
+	<li class="nav-item">
+	{% endif %}
+		<a class="nav-link" href="{% url 'tag_questions' %}">Tags</a>
+	</li>
+</ul>
+
+<form class="form-inline mt-100 mt-md-0 mr-auto">
+	<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+	<button class="btn search-button my-2 my-sm-0" type="submit">Search</button>
+</form>
+
+
+{% if the_url == "/tag/" or the_url == "/" or the_url == "/signin/" or the_url == "/signup/" %}
+<ul class="navbar-nav">
+	{% if the_url == "/signin/" %}
+	<li class="nav-item active">
+	{% else %}
+	<li class="nav-item">
+	{% endif %}
+		<a class="nav-link" href="{% url 'signin' %}">Log in</a>
+	</li>
+	
+	{% if the_url == "/signup/" %}
+	<li class="nav-item active">
+	{% else %}
+	<li class="nav-item">
+	{% endif %}
+		<a class="nav-link" href="{% url 'signup' %}">Register</a>
+	</li>
+</ul>
+{% else %}
+
+<ul class="navbar-nav">
+	{% if the_url == "/settings/" %}
+	<li class="nav-item active">
+	{% else %}
+	<li class="nav-item">
+	{% endif %}
+		<a class="nav-link" href="{% url 'settings' %}">Settings</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="">Log out</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="">Dr.House</a>
+	</li>
+</ul>
+
+{% endif %}
+{% endwith %}

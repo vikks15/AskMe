@@ -3,33 +3,8 @@
 
 <title>{% block title %}Askme{% endblock %}</title>
 
-{% block main_menu %}
-<ul class="navbar-nav mr-sm-3">  <!-- move search mr-auto-->
-	<li class="nav-item">
-		<a class="nav-link" href="/">Questions<span class="sr-only">(current)</span></a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="hot">Hot Questions</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="#">Tags</a>
-	</li>
-</ul>
-{% endblock %}
-
-{% block rightNavbar%}
+{% block rightNavbarImg %}
 <img src="{% static "img/moon.jpg" %}" class="img-resize" alt = "">
-<ul class="navbar-nav">
-	<li class="nav-item">
-		<a class="nav-link" href="#">Dr.House</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link active" href="#">Settings</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="#">Log out</a>
-	</li>
-</ul>
 {% endblock %}
 
 <h3 class="titles-mr">{% block pageName %}Settings: Mr. Smith{% endblock %}</h3>
