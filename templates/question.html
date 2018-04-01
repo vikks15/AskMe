@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+
+<h3 class="titles-mr">{% block pageName %}How to build a house?{% endblock %}</h3>
+
+{% block content %}
+<div class="row">
+	<div class="col-md-2"> 
+		<img src="{% static "img/cat2.jpeg" %}" alt = "" class="avatar-img">
+		<button type="button" class="btn likes-button btn-primary">
+			Likes <span class="badge badge-danger">9</span>
+			<span class="sr-only">unread messages</span>
+		</button>
+	</div>
+	<div class="col-md-10">
+		<p>Building your dream home can be one of the most exciting and rewarding projects you can undertake. Getting the opportunity to plan out each step of the process and make the decisions about your building project is a big responsibility, and can be overwhelming for even the most experienced do-it-yourselfers. Taking the scope of the project into account before you get started can help make the process go a lot more smoothly. Learn the proper ways to find the right location, design your home, acquire the correct permits, and breaking ground.
+		Building your dream home can be one of the most exciting and rewarding projects you can undertake. Getting the opportunity to plan out each step of the process and make the decisions about your building project is a big responsibility, and can be overwhelming for even the most experienced do-it-yourselfers. Taking the scope of the project into account before you get started can help make the process go a lot more smoothly. Learn the proper ways to find the right location, design your home, acquire the correct permits, and breaking ground</p>
+		<p>
+			<a style="margin-right:20px" href="">answers(3)</a>
+			Tags: <a href="">Home</a>
+			<a href="">Space</a>
+		</p>
+	</div>
+</div>
+<hr>
+<div class="row question-block">
+	<div class="col-md-2"> 
+		<img src="{% static "img/cat2.jpeg" %}" alt = "" class="avatar-img">
+	</div>
+	<div class="col-md-10">
+		<h4>Answer 1</h4>
+		<p>Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with padding-top: 60px; on the body > .container. Back to the default sticky footer minus the navbar.</p>
+		<button type="button" class="btn likes-button btn-primary correct-button">
+			Correct! <span class="badge badge-danger">9</span>
+			<span class="sr-only">Correct answer</span>
+		</button>
+	</div>
+</div>
+
+<div class="row question-block">
+	<div class="col-md-2"> 
+		<img src="{% static "img/moon.jpg" %}" class="avatar-img" alt="">
+	</div>
+	<div class="col-md-10">
+		<h4>Answer 2</h4>
+		<p>Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with padding-top: 60px; on the body > .container. Back to the default sticky footer minus the navbar.</p>
+		<button type="button" class="btn likes-button btn-primary correct-button">
+			Correct! <span class="badge badge-danger">7</span>
+			<span class="sr-only">Correct answer</span>
+		</button>
+	</div>
+</div>
+
+<div class="row question-block">
+	<div class="col-md-2"> 
+		<img src="{% static "img/flower.jpg" %}" class="avatar-img" alt="">
+	</div>
+	<div class="col-md-10">
+		<h4>Answer 3</h4>
+		<p>Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with padding-top: 60px; on the body > .container. Back to the default sticky footer minus the navbar.</p>
+		<button type="button" class="btn likes-button btn-primary correct-button">
+			Correct! <span class="badge badge-danger">3</span>
+			<span class="sr-only">Correct answer</span>
+		</button>
+	</div>
+</div>
+<hr>
+
+<form>
+	<div class="form-group">
+		<label for="exampleFormControlTextarea1">Write your answer here:</label>
+		<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+	</div>
+</form>
+
+<button type="button" class="btn btn-success answer-button">Answer</button>
+{% endblock %}

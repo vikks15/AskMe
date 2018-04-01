@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+<title>{% block title %}Askme: login{% endblock %}</title>
+
+{% block main_menu %}
+<ul class="navbar-nav mr-sm-3">  <!-- move search mr-auto-->
+	<li class="nav-item">
+		<a class="nav-link" href="\">Questions<span class="sr-only">(current)</span></a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="hot">Hot Questions</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="tag">Tags</a>
+	</li>
+</ul>
+{% endblock %}
+
+
+{% block rightNavbar %}
+<ul class="navbar-nav">
+	<li class="nav-item">
+		<a class="nav-link active" href="signin">Log in</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="signup">Register</a>
+	</li>
+</ul>
+{% endblock %}
+
+<h3 class="titles-mr">{% block pageName %}Log In{% endblock %}</h3>
+
+{% block content %}
+<p class="form-error">Sorry, wrong password!</p>
+<form>
+	<div class="form-group row">
+		<label class="col-sm-2 col-form-label">Login</label>
+		<div class="col-sm-3">
+			<input class="form-control" id="inputEmail3" placeholder="Enter your login here">
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+		<div class="col-sm-3">
+			<input type="password" class="form-control" id="inputPassword3" placeholder="*********">
+			<button type="submit" class="btn my-btn">Log In</button>
+		</div>
+	</div>
+</form>
+{% endblock %}

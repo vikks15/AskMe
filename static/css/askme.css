@@ -1,0 +1,123 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  line-height: 60px; /* Vertically center the text there */
+  background-color: #f5f5f5;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > .container {
+  padding: 60px 15px 0;
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+code {
+  font-size: 80%;
+}
+
+.question-block{
+    margin-bottom: 25px;
+    margin-right: 0px;
+    border: solid 1px #a9a8a5;
+    border-radius: 10px;
+    background: #f5f4fd;
+    padding: 20px;
+}
+
+.search-button {
+    color: #080808;
+    background-color: #dbccfd;
+    border: solid 1px;
+    border-color: #c1bfc1;
+    border-radius: 15px;
+}
+
+.search-button:hover {
+     color: #f9f9f9;
+     background: #a189d800;
+}
+
+.likes-button {
+    color: #080808;
+    background-color: #dbccfd;
+    border: solid 1px;
+    border-color: #c1bfc1;
+    border-radius: 15px;
+}
+
+.titles-mr {
+    margin-top: 50px;
+    margin-bottom: 15px;
+}
+
+.right-column {
+    margin-top: 85px;
+}
+
+.top-tag {
+    font-weight: 600;
+    font-size: 20px;
+    color: #ff960b;
+}
+
+.avatar-img {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  margin-right: 40px;
+}
+
+.logo {
+    font-weight: 600;
+    font-size: 35px;
+}
+
+.img-resize {
+    width: 50px;
+    height: 50px;
+}
+
+.correct-button {
+    float: right;
+}
+
+.answer-button {
+  margin-bottom: 20px;
+  float: right;
+}
+
+.form-error {
+  color:red;
+}
+
+.my-btn {
+    color: #000;
+    background-color: #dbccfd;
+    border-color: #660d96;
+    margin-top:10px;
+    margin-bottom:10px;
+    float: right;
+}
+.my-btn:hover {
+     background: #c3b7de;
+}
