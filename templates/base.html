@@ -11,7 +11,7 @@
 	<header>
 		<!-- Fixed navbar -->
 		<nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #300048;">
-			<a class="navbar-brand logo" href="#">AskMe</a>
+			<a class="navbar-brand logo" href="{% url "ask_question" %}">AskMe</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -34,10 +34,14 @@
 			<div class="row question-block">
 				<div class="col-md-2"> 
 					<img src="{% static "img/cat2.jpeg" %}" alt = "" class="avatar-img">
-					<button type="button" class="btn likes-button btn-primary">
-						Likes <span class="badge badge-danger">9</span>
-						<span class="sr-only">unread messages</span>
-					</button>
+					<form>
+						<div class="form-group row">
+							<label class="col-sm-5 col-form-label">Like</label>
+							<div class="col-sm-3">
+								<input type="number" min="0" max="50" step="1" value="2" size="6">
+							</div>
+						</div>
+					</form>
 				</div>
 				<div class="col-md-10">
 					<h4><a href="{% url 'question_page' %}">Question 1</a></h4>
@@ -53,10 +57,14 @@
 			<div class="row question-block">
 				<div class="col-md-2"> 
 					<img src= "{% static "img/moon.jpg" %}" class="avatar-img" alt="">
-					<button type="button" class="btn likes-button btn-primary">
-						Likes <span class="badge badge-danger">9</span>
-						<span class="sr-only">unread messages</span>
-					</button>
+					<form>
+						<div class="form-group row">
+							<label class="col-sm-5 col-form-label">Like</label>
+							<div class="col-sm-3">
+								<input type="number" min="0" max="50" step="1" value="8" size="6">
+							</div>
+						</div>
+					</form>
 				</div>
 				<div class="col-md-10">
 					<h4>Question 2</h4>
@@ -72,10 +80,14 @@
 			<div class="row question-block">
 				<div class="col-md-2"> 
 					<img src= "{% static "img/flower.jpg" %}" class="avatar-img" alt="">
-					<button type="button" class="btn likes-button btn-primary">
-						Likes <span class="badge badge-danger">9</span>
-						<span class="sr-only">unread messages</span>
-					</button>
+					<form>
+						<div class="form-group row">
+							<label class="col-sm-5 col-form-label">Like</label>
+							<div class="col-sm-3">
+								<input type="number" min="0" max="50" step="1" value="6" size="6">
+							</div>
+						</div>
+					</form>
 				</div>
 				<div class="col-md-10">
 					<h4>Question 3</h4>
