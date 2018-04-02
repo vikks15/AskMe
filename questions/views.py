@@ -36,13 +36,17 @@ def tag(request, tag_name):
 
 
 def question(request, question_id):
+    questions = []
+    for i in range(0,30):
+    	questions.append({
+    	'title': 'title' + str(i),
+    	'question_id': i,
+    	'text': 'text' + str(i)
+    	})
+    q = questions[question_id]['title'];
     response = "You're looking at the results of question %s."
-    res = render(request, 'question.html')
+    res = render(request, 'question.html', questions[question_id])
     return HttpResponse(res)
-
-def results(request, question_id):
-		number = request.GET.get('id',' ')
-
 
 def settings(request, user_name):
     res = render(request, 'mysettings.html')
