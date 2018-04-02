@@ -27,7 +27,6 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-9">
-
 			<h3 class="titles-mr">{% block pageName %}Questions{% endblock %}</h3>
 
 			{% block content %}
@@ -99,7 +98,9 @@
 					</p>
 				</div>
 			</div>
+			{% endblock %}
 
+			{% block paginator %}
 			<nav aria-label="Page navigation example">
 				<ul class="pagination">
 					<li class="page-item">
@@ -112,17 +113,17 @@
 					<li class="page-item"><a class="page-link" href="#">2</a></li>
 					<li class="page-item"><a class="page-link" href="#">3</a></li>
 					<li class="page-item">
-						<a class="page-link" href="#" aria-label="Next">
+						<a class="page-link" href="?page={{ page.next.page_number }}" aria-label="Next">
 							<span aria-hidden="true">&raquo;</span>
 							<span class="sr-only">Next</span>
 						</a>
 					</li>
 				</ul>
 			</nav>
-		{% endblock %}		
+			{% endblock %}
+			
+
 		</div>
-
-
 		<div class="col-md-3 right-column">
 			<h4>Popular Tags</h4>
 			<div class="container">

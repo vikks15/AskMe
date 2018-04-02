@@ -7,7 +7,7 @@
 <img src="{% static "img/moon.jpg" %}" class="img-resize" alt = "">
 {% endblock %}
 
-<h3 class="titles-mr">{% block pageName %}New Question{% endblock %}</h3>
+{% block pageName %}New Question{% endblock %}
 
 {% block content %}
 <p class="form-error">Sorry, maximum size of questions title is 50 words!</p>
@@ -37,3 +37,5 @@
 	<button type="submit" class="btn my-btn">Ask!</button>
 </div>
 {% endblock %}	
+
+{% block paginator %} {% endblock %}

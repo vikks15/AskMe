@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Question
+from django.views.generic import ListView
 
 # Create your views here.
 
@@ -12,8 +14,9 @@ def base(request):
 def hot(request):
 	return render(request, 'index.html', {
 		'questions': [ ],
-		'header': 'some text'
-		})
+		'header': 'some text',
+		'page_alias': 'hot'
+	})
 
 def ask(request):
 	return render(request, 'ask.html', {
@@ -23,7 +26,7 @@ def ask(request):
 def signIn(request):
 	return render(request, 'login.html', {
 		'header': 'some text'
-		})
+	})
 
 def signUp(request):
 	return render(request, 'signup.html', {
@@ -53,5 +56,12 @@ def settings(request, user_name):
     return HttpResponse(res)
 
 def paginate(objects_list, request):
+
     # do smth with Paginator, etc…
     return objects_page, paginator
+
+class QuestionsList(ListView):
+ 	queryset = Question.objects.all()
+ 	context_object_name = 'questions'
+ 	paginate_by = 2
+ 	template_name = 'questionList.html'

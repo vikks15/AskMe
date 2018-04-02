@@ -11,7 +11,7 @@
 		<a class="nav-link" href="{% url 'base_questions' %}">Questions<span class="sr-only">(current)</span></a>
 	</li>
 	
-	{% if the_url == "/hot/" %}
+	{% if the_url == "hot" %}
 	<li class="nav-item active">
 	{% else %}
 	<li class="nav-item">
@@ -19,7 +19,7 @@
 		<a class="nav-link" href="{% url 'hot_questions' %}">Hot Questions</a>
 	</li>
 
-	{% if the_url == "/tag/" %}
+	{% if the_url == "/tag/moon/" %}
 	<li class="nav-item active">
 	{% else %}
 	<li class="nav-item">
@@ -55,7 +55,7 @@
 {% else %}
 
 <ul class="navbar-nav">
-	{% if the_url == "/settings/" %}
+	{% if the_url == "/settings/Mr_Smith/" %}
 	<li class="nav-item active">
 	{% else %}
 	<li class="nav-item">
