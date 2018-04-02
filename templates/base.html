@@ -44,7 +44,7 @@
 					</form>
 				</div>
 				<div class="col-md-10">
-					<h4><a href="{% url 'question_page' %}">Question 1</a></h4>
+					<h4><a href="{% url 'question_page' question_id=1 %}">Question 1 {{question_id}} </a></h4>
 					<p>Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with padding-top: 60px; on the body > .container. Back to the default sticky footer minus the navbar.</p>
 					<p>
 						<a style="margin-right:20px" href="">answers(3)</a>
@@ -67,7 +67,7 @@
 					</form>
 				</div>
 				<div class="col-md-10">
-					<h4>Question 2</h4>
+					<h4><a href="{% url 'question_page' question_id=2 %}">Question 2 </a></h4>
 					<p>Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with padding-top: 60px; on the body > .container. Back to the default sticky footer minus the navbar.</p>
 					<p>
 						<a style="margin-right:20px" href="">answers(3)</a>
@@ -90,7 +90,7 @@
 					</form>
 				</div>
 				<div class="col-md-10">
-					<h4>Question 3</h4>
+					<h4><a href="{% url 'question_page' question_id=3 %}">Question 3 </a></h4>
 					<p>Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with padding-top: 60px; on the body > .container. Back to the default sticky footer minus the navbar.</p>
 					<p>
 						<a style="margin-right:20px" href="">answers(3)</a>
@@ -144,9 +144,9 @@
 			</div>
 			<h4 class="titles-mr">Top Users</h4>
 			<div class="container">
-				<p><a href="google.com">Mr.Smith</a></p>
-				<p><a href="google.com">Mr.Adams</a></p>
-				<p><a href="google.com">Mrs.Brown</a></p>
+				<p><a href="">Mr.Smith</a></p>
+				<p><a href="">Mr.Adams</a></p>
+				<p><a href="">Mrs.Brown</a></p>
 			</div>
 		</div>
 	</div>

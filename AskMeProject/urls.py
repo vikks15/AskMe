@@ -22,12 +22,12 @@ urlpatterns = [
 	path('admin/', admin.site.urls),
     path('', views.base, name='base_questions'),
     path('hot/', views.hot, name='hot_questions'),
-    path('tag/', views.tag, name='tag_questions'),
+    path('tag/<slug:tag_name>/', views.tag, name='tag_questions'),
     path('ask/', views.ask, name='ask_question'),
     path('signup/', views.signUp, name='signup'),
-    path('settings/', views.settings, name='settings'),
+    path('settings/<slug:user_name>/', views.settings, name='settings'),
     path('signin/', views.signIn, name='signin'),
-    path('question/', views.question, name='question_page')
+    path('question/<int:question_id>/', views.question, name='question_page')
 
 ]
 

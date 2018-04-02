@@ -24,7 +24,7 @@
 	{% else %}
 	<li class="nav-item">
 	{% endif %}
-		<a class="nav-link" href="{% url 'tag_questions' %}">Tags</a>
+		<a class="nav-link" href="{% url 'tag_questions' tag_name='moon' %}">Tags</a>
 	</li>
 </ul>
 
@@ -60,13 +60,13 @@
 	{% else %}
 	<li class="nav-item">
 	{% endif %}
-		<a class="nav-link" href="{% url 'settings' %}">Settings</a>
+		<a class="nav-link" href="{% url 'settings' user_name='Mr_Smith' %}">Settings</a>
 	</li>
 	<li class="nav-item">
 		<a class="nav-link" href="">Log out</a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="">Dr.House</a>
+		<a class="nav-link" href="">Mr.Smith</a>
 	</li>
 </ul>
 

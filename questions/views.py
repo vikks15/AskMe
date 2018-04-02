@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -29,23 +30,24 @@ def signUp(request):
 		'header': 'some text'
 		})
 
-def tag(request):
-	return render(request, 'tagQuestion.html', {
-		'header': 'some text'
-		})
+def tag(request, tag_name):
+    res = render(request, 'tagQuestion.html')
+    return HttpResponse(res)
 
-def question(request):
-	return render(request, 'question.html', {
-		'header': 'some text'
-		})
 
-def settings(request):
-	return render(request, 'mysettings.html', {
-		'header': 'some text'
-		})
+def question(request, question_id):
+    response = "You're looking at the results of question %s."
+    res = render(request, 'question.html')
+    return HttpResponse(res)
 
-def menu_switch(url):
-	if url == 'base_questions':
-		return true
-	else:
-		return false
+def results(request, question_id):
+		number = request.GET.get('id',' ')
+
+
+def settings(request, user_name):
+    res = render(request, 'mysettings.html')
+    return HttpResponse(res)
+
+def paginate(objects_list, request):
+    # do smth with Paginator, etc…
+    return objects_page, paginator
