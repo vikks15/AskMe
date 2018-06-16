@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from .models import Profile, Question, Answer, Tag, Answer_Like, Question_Like
+from .models import Profile, Question, Answer, Tag
 
 # Register your models here.
 
@@ -15,14 +15,6 @@ class ProfileAdmin(admin.ModelAdmin):
 	pass
 
 @admin.register(Answer)
-class ProfileAdmin(admin.ModelAdmin):
-	pass
-
-@admin.register(Question_Like)
-class ProfileAdmin(admin.ModelAdmin):
-	pass
-
-@admin.register(Answer_Like)
 class ProfileAdmin(admin.ModelAdmin):
 	pass
 

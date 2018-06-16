@@ -1,17 +1,17 @@
 
 <ul class="navbar-nav mr-sm-3">  <!-- move search mr-auto-->
 
-	{% with request.path as the_url %}
-
-	{% if the_url == "/" %}
+	<!--{ with request.path as the_url%} ... { endwith %} without page_alias-->
+		
+	{% if page_alias == "base" %}
 	<li class="nav-item active">
 	{% else %}
 	<li class="nav-item">
 	{% endif %}
-		<a class="nav-link" href="{% url 'base_questions' %}">Questions<span class="sr-only">(current)</span></a>
+		<a class="nav-link" href="{% url 'base_questions' %}">Questions <span class="sr-only">(current)</span></a>
 	</li>
 	
-	{% if the_url == "hot" %}
+	{% if page_alias == "hotQuestions" %}
 	<li class="nav-item active">
 	{% else %}
 	<li class="nav-item">
@@ -19,7 +19,7 @@
 		<a class="nav-link" href="{% url 'hot_questions' %}">Hot Questions</a>
 	</li>
 
-	{% if the_url == "/tag/moon/" %}
+	{% if page_alias == "tag" %}
 	<li class="nav-item active">
 	{% else %}
 	<li class="nav-item">
@@ -34,9 +34,9 @@
 </form>
 
 
-{% if the_url == "/tag/" or the_url == "/" or the_url == "/signin/" or the_url == "/signup/" %}
+{% if page_alias == "tag" or page_alias == "" or page_alias == "signIn" or page_alias == "signUp" %}
 <ul class="navbar-nav">
-	{% if the_url == "/signin/" %}
+	{% if page_alias == "signIn" %}
 	<li class="nav-item active">
 	{% else %}
 	<li class="nav-item">
@@ -44,7 +44,7 @@
 		<a class="nav-link" href="{% url 'signin' %}">Log in</a>
 	</li>
 	
-	{% if the_url == "/signup/" %}
+	{% if page_alias == "signUp" %}
 	<li class="nav-item active">
 	{% else %}
 	<li class="nav-item">
@@ -55,7 +55,7 @@
 {% else %}
 
 <ul class="navbar-nav">
-	{% if the_url == "/settings/Mr_Smith/" %}
+	{% if page_alias == "settings" %}
 	<li class="nav-item active">
 	{% else %}
 	<li class="nav-item">
@@ -71,4 +71,3 @@
 </ul>
 
 {% endif %}
-{% endwith %}

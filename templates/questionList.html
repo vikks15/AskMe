@@ -33,23 +33,14 @@
 {% endblock %}
 
 {% block paginator %}
-			<nav aria-label="Page navigation example">
-				<ul class="pagination">
-					<li class="page-item">
-						<a class="page-link" href="#" aria-label="Previous">
-							<span aria-hidden="true">&laquo;</span>
-							<span class="sr-only">Previous</span>
-						</a>
-					</li>
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item">
-						<a class="page-link" href="?page={{ page.next.page_number }}" aria-label="Next">
-							<span aria-hidden="true">&raquo;</span>
-							<span class="sr-only">Next</span>
-						</a>
-					</li>
-				</ul>
-			</nav>
+
+{% for page in questions.paginator.page_range %}
+{% if page == questions.number %}
+	<a href="?page={{ page }}" type="button" class="btn btn-dark active">{{ page }}</a>
+{% else %}
+	<a href="?page={{ page }}" type="button" class="btn btn-dark">{{ page }}</a>
+{% endif %}
+{% endfor %}
+
 {% endblock %}
+
