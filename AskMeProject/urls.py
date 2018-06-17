@@ -20,8 +20,8 @@ from questions import views
 
 urlpatterns = [
 	path('admin/', admin.site.urls),
-    path('', views.base, name='base_questions'),
-    path('hot/', views.QuestionsList, name='hot_questions'),
+    path('', views.questionsPage, name='base_questions'),
+    path('hot/', views.hot, name='hot_questions'),
     path('tag/<slug:tag_name>/', views.tag, name='tag_questions'),
     path('ask/', views.ask, name='ask_question'),
     path('signup/', views.signUp, name='signup'),

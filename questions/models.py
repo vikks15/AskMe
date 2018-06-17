@@ -27,8 +27,8 @@ class TagsManager(models.Manager):
 class Profile(models.Model):
 	avatar = models.ImageField(
 		blank = False,
-		default = "moon.jpg",
-		upload_to='uploads/%Y/%m/%d/'
+		default = "static/img/avatars/default.png",
+		upload_to = 'static/img/avatars/%Y/%m/%d/'
 
 	)
 	user = models.OneToOneField(User, on_delete = models.CASCADE)
@@ -65,7 +65,7 @@ class Question(models.Model):
 	text = models.TextField()	
 	creationTime = models.DateTimeField(auto_now_add=True)
 	objects = models.Manager()
-	tags = models.ManyToManyField(Tag, blank=True)
+	tags = models.ManyToManyField(Tag, blank=True, related_name = 'questions')
 	likes = GenericRelation(Like, related_query_name='questions')
 	rating = models.IntegerField(default=0)
 
@@ -80,6 +80,9 @@ class Question(models.Model):
 	def __str__(self):
 		return self.title
 
+	class Meta:
+		ordering = ['-creationTime']
+		
 class Answer(models.Model):
 	author = models.ForeignKey(Profile, on_delete = models.CASCADE, null = False)
 	question = models.ForeignKey(Question, on_delete = models.CASCADE, null = False)

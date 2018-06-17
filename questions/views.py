@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Question
 from django.views.generic import ListView
+from django.db.models import Count
 
 from django.urls import reverse 
 from django.contrib.auth import authenticate, login
@@ -10,18 +11,23 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.csrf import csrf_protect
 # Create your views here.
 
-def base(request):
-	return render(request, 'base.html', {
-		'questions': [ ],
-		'header': 'New Questions',
-		'page_alias': 'base'
+def questionsPage(request):
+	#questions_list = Question.objects.all() - without answers count
+	questions_list = Question.objects.annotate(number_of_answers = Count('answer'))
+	context_object_name = 'questions'
+	questions, page = paginating(questions_list, request)
+	return render(request, 'questionList.html', {
+		"questions": questions,
+		"page": page, 
+		"sort": "new", 
+		'page_alias': 'questionList'
 		})
 
 def hot(request):
-	return render(request, 'index.html', {
+	return render(request, 'hot.html', {
 		'questions': [ ],
 		'header': 'some text',
-		#'page_alias': 'hot'
+		'page_alias': 'hot'
 	})
 
 def ask(request):
@@ -102,15 +108,8 @@ def paginate(objects_list, request):
     return objects_page, paginator
 
 
-def QuestionsList(request):
-	questions_list = Question.objects.all()
-	context_object_name = 'questions'
-	questions, page = paginating(questions_list, request)
-	return render(request, 'questionList.html', {"questions": questions, "page": page, "sort": "new", 'page_alias': 'hotQuestions'})
-
-
 def paginating(object_list, request):
-	paginator = Paginator(object_list, 2)
+	paginator = Paginator(object_list, 5)
 	page = request.GET.get('page')
 	try:
 		objects = paginator.page(page)

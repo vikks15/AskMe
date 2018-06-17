@@ -3,7 +3,7 @@
 
 	<!--{ with request.path as the_url%} ... { endwith %} without page_alias-->
 		
-	{% if page_alias == "base" %}
+	{% if page_alias == "questionList" %}
 	<li class="nav-item active">
 	{% else %}
 	<li class="nav-item">
@@ -11,7 +11,7 @@
 		<a class="nav-link" href="{% url 'base_questions' %}">Questions <span class="sr-only">(current)</span></a>
 	</li>
 	
-	{% if page_alias == "hotQuestions" %}
+	{% if page_alias == "hot" %}
 	<li class="nav-item active">
 	{% else %}
 	<li class="nav-item">
