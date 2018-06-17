@@ -5,7 +5,8 @@ from django.shortcuts import get_object_or_404
 from django.contrib.contenttypes.fields import GenericRelation #reverse relations
 from django.contrib.contenttypes.fields import GenericForeignKey #points on different models
 from django.contrib.contenttypes.models import ContentType
-from django.urls import reverse 
+from django.urls import reverse
+from django.db.models import Count
 # Create your models here.
 
 class QuestionManager(models.Manager):
@@ -13,7 +14,7 @@ class QuestionManager(models.Manager):
 		return self.all()
 
 	def hottest(self):
-		return self.order_by('rating')
+		return self.annotate(number_of_answers = Count('answer')).order_by('-rating')
 
 	#def search
 class TagsManager(models.Manager):
@@ -67,7 +68,7 @@ class Question(models.Model):
 	objects = models.Manager()
 	tags = models.ManyToManyField(Tag, blank=True, related_name = 'questions')
 	likes = GenericRelation(Like, related_query_name='questions')
-	rating = models.IntegerField(default=0)
+	rating = models.IntegerField(default=0) #comparison with other questions by likes
 
 	objects = QuestionManager()
 
@@ -82,7 +83,7 @@ class Question(models.Model):
 
 	class Meta:
 		ordering = ['-creationTime']
-		
+
 class Answer(models.Model):
 	author = models.ForeignKey(Profile, on_delete = models.CASCADE, null = False)
 	question = models.ForeignKey(Question, on_delete = models.CASCADE, null = False)

@@ -26,6 +26,7 @@
 				</div>
 				<div>{{ page.number }}</div>
 
+				<p> Rating: {{question.rating}}</p> 
 				<a style="margin-right:20px" href="">Answers ({{question.number_of_answers}})</a>
 				Tags: 			
 
@@ -34,7 +35,7 @@
 					<a style="margin-right:10px" href="">{{ tag.name }}</a>
 				{% endfor %}
 
-				<p> Asked {{question.creationTime}} </p>
+				<p> Asked {{question.creationTime}}</p>
 			</p>
 		</div>
 	</div>

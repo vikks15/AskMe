@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Question
 from django.views.generic import ListView
-from django.db.models import Count
 
 from django.urls import reverse 
 from django.contrib.auth import authenticate, login
@@ -13,7 +12,7 @@ from django.views.decorators.csrf import csrf_protect
 
 def questionsPage(request):
 	#questions_list = Question.objects.all() - without answers count
-	questions_list = Question.objects.annotate(number_of_answers = Count('answer'))
+	questions_list = Question.objects.newest()
 	context_object_name = 'questions'
 	questions, page = paginating(questions_list, request)
 	return render(request, 'questionList.html', {
@@ -24,11 +23,21 @@ def questionsPage(request):
 		})
 
 def hot(request):
-	return render(request, 'hot.html', {
+	"""return render(request, 'hot.html', {
 		'questions': [ ],
 		'header': 'some text',
 		'page_alias': 'hot'
-	})
+	})"""
+	questions_list = Question.objects.hottest()
+	#questions_list = Question.objects.annotate(number_of_answers = Count('answer'))
+	context_object_name = 'questions'
+	questions, page = paginating(questions_list, request)
+	return render(request, 'hot.html', {
+		"questions": questions,
+		"page": page, 
+		"sort": "new", 
+		'page_alias': 'hot'
+		})
 
 def ask(request):
 #	form = AskForm(request.POST or None)
