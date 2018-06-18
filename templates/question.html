@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
 
-<h3 class="titles-mr">{% block pageName %}How to build a house?{% endblock %}</h3>
+{% block title %} {{ question.title }} {% endblock %}
+
+{% block pageName %} <h3 class="titles-mr"> Question: {{ question.title }}</h3> {% endblock %}
 
 {% block content %}
 <div class="row">
 	<div class="col-md-2"> 
-		<img src="{% static "img/cat2.jpeg" %}" alt = "" class="avatar-img">
+		<img src="/{{question.author.avatar.url}}" alt = "" class="avatar-img">
+		<p><b><i>{{question.author.user}}</i></b></p>
 		<form>
 			<div class="form-group row">
 				<label class="col-sm-5 col-form-label">Likes</label>
@@ -17,69 +20,51 @@
 		</form>
 	</div>
 	<div class="col-md-10">
-		<p>Building your dream home can be one of the most exciting and rewarding projects you can undertake. Getting the opportunity to plan out each step of the process and make the decisions about your building project is a big responsibility, and can be overwhelming for even the most experienced do-it-yourselfers. Taking the scope of the project into account before you get started can help make the process go a lot more smoothly. Learn the proper ways to find the right location, design your home, acquire the correct permits, and breaking ground.
-		Building your dream home can be one of the most exciting and rewarding projects you can undertake. Getting the opportunity to plan out each step of the process and make the decisions about your building project is a big responsibility, and can be overwhelming for even the most experienced do-it-yourselfers. Taking the scope of the project into account before you get started can help make the process go a lot more smoothly. Learn the proper ways to find the right location, design your home, acquire the correct permits, and breaking ground</p>
-		<p>
-			<a style="margin-right:20px" href="">answers(3)</a>
-			Tags: <a href="">Home</a>
-			<a href="">Space</a>
-		</p>
+		<p> {{ question.text }} </p>
+		<i>Tags: 
+			{% for tag in question.tags.all %}				
+				<a style="margin-right:10px" href="">{{ tag.name }}</a>
+			{% endfor %}
+		</i>
+		<p align="right"><font size="2"> Rating: {{question.rating}} <br>
+		Asked {{question.creationTime}}</font></p>
 	</div>
 </div>
+
+<div>
+{% if answers.count == 1 %}
+	{{answers.count}} Answer
+{% else %}
+	{{answers.count}} Answers
+{% endif %}
 <hr>
-<div class="row question-block">
-	<div class="col-md-2"> 
-		<img src="{% static "img/cat2.jpeg" %}" alt = "" class="avatar-img">
-	</div>
-	<div class="col-md-10">
-		<h4>Answer 1</h4>
-		<p>Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with padding-top: 60px; on the body > .container. Back to the default sticky footer minus the navbar.</p>
-		<form>
-			<div class="form-group row">
-				<label class="col-sm-1 col-form-label">Likes</label>
-				<div class="col-sm-2 likes">
-					<input type="number" min="0" max="50" step="1" value="2" size="6">
-				</div>
-			</div>
-		</form>
-	</div>
 </div>
 
+{%for ans in answers%}
 <div class="row question-block">
 	<div class="col-md-2"> 
-		<img src="{% static "img/moon.jpg" %}" class="avatar-img" alt="">
-	</div>
-	<div class="col-md-10">
-		<h4>Answer 2</h4>
-		<p>Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with padding-top: 60px; on the body > .container. Back to the default sticky footer minus the navbar.</p>
+		<img src = "/{{ans.author.avatar.url}}" alt = "" class="avatar-img">
+		<p><b><i>{{ans.author.user}}</i></b></p>
 		<form>
 			<div class="form-group row">
-				<label class="col-sm-1 col-form-label">Likes</label>
-				<div class="col-sm-2">
+				<label class="col-sm-5 col-form-label">Likes</label>
+				<div class="col-sm-3 likes">
 					<input type="number" min="0" max="50" step="1" value="2" size="6">
 				</div>
 			</div>
 		</form>
+		<p>Rating: {{ans.rating}}</p>
+	</div>
+	<div class="col-md-10">
+		{% if ans.title %}
+		<h4>{{ans.title}}</h4>
+		{% endif %}
+		<p>{{ans.text}}</p>
+		<p align="right"><font size="2">{{ans.creationTime}}</font></p>
 	</div>
 </div>
+{% endfor %}
 
-<div class="row question-block">
-	<div class="col-md-2"> 
-		<img src="{% static "img/flower.jpg" %}" class="avatar-img" alt="">
-	</div>
-	<div class="col-md-10">
-		<h4>Answer 3</h4>
-		<p>Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with padding-top: 60px; on the body > .container. Back to the default sticky footer minus the navbar.</p>
-		<form>
-			<div class="form-group row">
-				<label class="col-sm-1 col-form-label">Likes</label>
-				<div class="col-sm-2 likes">
-					<input type="number" min="0" max="50" step="1" value="2" size="6">
-				</div>
-			</div>
-		</form>
-	</div>
-</div>
 <hr>
 
 <form>
@@ -90,4 +75,16 @@
 </form>
 
 <button type="button" class="btn btn-success answer-button">Answer</button>
+{% endblock %}
+
+{% block paginator %}
+
+{% for page in answers.paginator.page_range %}
+{% if page == answers.number %}
+	<a href="?page={{ page }}" type="button" class="btn btn-dark active">{{ page }}</a>
+{% else %}
+	<a href="?page={{ page }}" type="button" class="btn btn-dark">{{ page }}</a>
+{% endif %}
+{% endfor %}
+
 {% endblock %}

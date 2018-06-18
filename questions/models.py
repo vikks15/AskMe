@@ -11,16 +11,23 @@ from django.db.models import Count
 
 class QuestionManager(models.Manager):
 	def newest(self):
-		return self.all()
+		return self.annotate(number_of_answers = Count('answer'))
 
 	def hottest(self):
 		return self.annotate(number_of_answers = Count('answer')).order_by('-rating')
+
+	def withId(self, _id):
+		return get_object_or_404(self, pk = _id)
 
 	#def search
 class TagsManager(models.Manager):
 	def newest_by_tag(self, _tag):
 		return get_object_or_404(self, name = _tag).questions.all().order_by('creationTime')
 
+
+class AnswerManager(models.Manager):
+	def hottest (self, questionId):
+		return self.filter(question_id = questionId).order_by('-rating','-creationTime')
 
 	#def hottest_by tag:
 
@@ -93,8 +100,7 @@ class Answer(models.Model):
 	likes = GenericRelation(Like, related_query_name = 'answers')
 	rating = models.IntegerField(default = 0)
 	is_correct = models.BooleanField(default = False)
-
-	#objects = AnswerManager()
+	objects = AnswerManager()
 	
 	def __str__(self):
 		return ('Re: ' + self.question.title)

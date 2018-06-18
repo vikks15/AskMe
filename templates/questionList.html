@@ -20,22 +20,20 @@
 			</form>
 		</div>
 		<div class="col-md-10">
-			<h4><a href="{% url 'question_page' question_id=1 %}"> {{ question.title }} </a></h4>
+			<h4><a href="{% url 'question_page' question.id %}"> {{ question.title }} </a></h4>
 				<div>
 					{{ question.text|safe|truncatewords:"50"|linebreaks }}
 				</div>
 				<div>{{ page.number }}</div>
 
-				<p> Rating: {{question.rating}}</p> 
-				<a style="margin-right:20px" href="">Answers ({{question.number_of_answers}})</a>
+				<p><i>Rating: {{question.rating}}</i></p> 
+				<a style="margin-right:20px" href="{% url 'question_page' question.id %}">Answers ({{question.number_of_answers}})</a>
 				Tags: 			
-
 				{% for tag in question.tags.all %}
 					<!--<a href="{% url 'tag_questions' tag.name }">{{ tag.name }}</a>-->
 					<a style="margin-right:10px" href="">{{ tag.name }}</a>
 				{% endfor %}
-
-				<p> Asked {{question.creationTime}}</p>
+				<p align="right"><font size="2"> Asked {{question.creationTime}}</font></p>
 			</p>
 		</div>
 	</div>
@@ -52,6 +50,6 @@
 	<a href="?page={{ page }}" type="button" class="btn btn-dark">{{ page }}</a>
 {% endif %}
 {% endfor %}
-
+<p> </p>
 {% endblock %}
 

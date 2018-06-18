@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Question
+from .models import Question, Answer
 from django.views.generic import ListView
 
 from django.urls import reverse 
@@ -23,13 +23,7 @@ def questionsPage(request):
 		})
 
 def hot(request):
-	"""return render(request, 'hot.html', {
-		'questions': [ ],
-		'header': 'some text',
-		'page_alias': 'hot'
-	})"""
 	questions_list = Question.objects.hottest()
-	#questions_list = Question.objects.annotate(number_of_answers = Count('answer'))
 	context_object_name = 'questions'
 	questions, page = paginating(questions_list, request)
 	return render(request, 'hot.html', {
@@ -38,6 +32,21 @@ def hot(request):
 		"sort": "new", 
 		'page_alias': 'hot'
 		})
+
+def tag(request, tag_name):
+    return render(request, 'tagQuestion.html', {
+    	'page_alias': 'tag',
+    	'tag_name' : tag_name
+    	})
+    #res = render ...
+    #return HttpResponse(res)
+def question(request, question_id):
+	question = Question.objects.withId(question_id)
+	answers = Answer.objects.hottest(question_id)
+	page = paginating(answers, request)
+
+	context = {'question': question, 'answers': answers, 'page': page}
+	return render(request, "question.html", context)
 
 def ask(request):
 #	form = AskForm(request.POST or None)
@@ -82,26 +91,6 @@ def signUp(request):
 		'header': 'some text',
 		'page_alias': 'signUp'
 		})
-
-def tag(request, tag_name):
-    res = render(request, 'tagQuestion.html', {
-    	'page_alias': 'tag'
-    	})
-    return HttpResponse(res)
-
-
-def question(request, question_id):
-    questions = []
-    for i in range(0,30):
-    	questions.append({
-    	'title': 'title' + str(i),
-    	'question_id': i,
-    	'text': 'text' + str(i)
-    	})
-    q = questions[question_id]['title'];
-    response = "You're looking at the results of question %s."
-    res = render(request, 'question.html', questions[question_id])
-    return HttpResponse(res)
 
 def settings(request, user_name):
     #res = render(request, 'mysettings.html')
