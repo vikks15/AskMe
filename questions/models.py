@@ -89,7 +89,7 @@ class Question(models.Model):
 															self.slug])
 	#assigning proper name to model objects (for admin panel)
 	def __str__(self):
-		return (self.title, self.tags.name)
+		return self.title
 
 	class Meta:
 		ordering = ['-creationTime']

@@ -5,9 +5,12 @@ from django.views.generic import ListView
 
 from django.urls import reverse 
 from django.contrib.auth import authenticate, login
-from questions.forms import AskForm
+from questions.forms import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.csrf import csrf_protect
+
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.shortcuts import redirect
 # Create your views here.
 
 def questionsPage(request):
@@ -47,8 +50,21 @@ def question(request, question_id):
 	question = Question.objects.withId(question_id)
 	answers = Answer.objects.hottest(question_id)
 	page = paginating(answers, request)
+	form = AnswerForm()
 
-	context = {'question': question, 'answers': answers, 'page': page}
+	if request.method == "POST":
+		form = AnswerForm(request.POST) #binding data to the form
+		if form.is_valid():
+			answer = form.save(commit=False)
+			answer.author = request.user.profile
+			answer.question = question
+			answer.save()
+			#page_number = answer.get_page()
+			return redirect('/question/' + str(question_id), pk=answer.pk)
+	else:
+		form = AnswerForm()
+
+	context = {'question': question, 'answers': answers, 'page': page, 'form': form}
 	return render(request, "question.html", context)
 
 def ask(request):
@@ -67,24 +83,27 @@ def ask(request):
 #				)
 	return render(request, 'ask.html', {
 		'header': 'some text' ,
-		'form': form ,
+		#'form': form ,
 		'page_alias': 'ask'
 		})
 
+
+
+
 def signIn(request):
 	if request.POST:
-		user = auth.authenticate (
-			username = request.POST.get('username'),
-			password = request.POST.get('password'),
-			)
+		form = AuthenticationForm(data=request.POST)
+		if form.is_valid():
+			#login the user
+			user = form.get_user()
+			login(request, user)
+			return redirect('base_questions')
+	else:
+		form = AuthenticationForm()
+	return render(request, 'login.html', {'form': form})
 
-		if user is not None:
-			auth.login(request, user)
-			return redirect('/')
-	return render(request, 'login.html', {
-		'header': 'some text',
-		'page_alias': 'signIn'
-	})
+
+
 
 def logout(request):
 	return redirect(reverse('index'))
@@ -103,12 +122,6 @@ def settings(request, user_name):
 		'page_alias': 'settings'
 		})
 
-def paginate(objects_list, request):
-
-    # do smth with Paginator, etc…
-    return objects_page, paginator
-
-
 def paginating(object_list, request):
 	paginator = Paginator(object_list, 5)
 	page = request.GET.get('page')
@@ -122,7 +135,7 @@ def paginating(object_list, request):
 
 
 @csrf_protect
-def login(request):
+def loggggin(request):
 	args = {}
 	if request.POST:
 		username = request.POST.get('inputLogin', '')

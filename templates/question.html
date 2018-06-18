@@ -74,6 +74,12 @@
 	</div>
 </form>
 
+<form method="POST" class="post-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Answer" />
+</form>
+
 <button type="button" class="btn btn-success answer-button">Answer</button>
 {% endblock %}
 
