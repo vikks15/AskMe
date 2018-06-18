@@ -10,14 +10,6 @@
 	{% endif %}
 		<a class="nav-link" href="{% url 'base_questions' %}">Questions <span class="sr-only">(current)</span></a>
 	</li>
-	
-	{% if page_alias == "hot" %}
-	<li class="nav-item active">
-	{% else %}
-	<li class="nav-item">
-	{% endif %}
-		<a class="nav-link" href="{% url 'hot_questions' %}">Hot Questions</a>
-	</li>
 
 	{% if page_alias == "tag" %}
 	<li class="nav-item active">
@@ -25,6 +17,14 @@
 	<li class="nav-item">
 	{% endif %}
 		<a class="nav-link" href="{% url 'tag_questions' tag_name='all' %}">Tags</a>
+	</li>
+
+	{% if page_alias == "ask" %}
+	<li class="nav-item active">
+	{% else %}
+	<li class="nav-item">
+	{% endif %}
+		<a class="nav-link" href="{% url 'ask_question' %}">Ask</a>
 	</li>
 </ul>
 

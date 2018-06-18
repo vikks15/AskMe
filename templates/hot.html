@@ -7,9 +7,18 @@
 <img src="{% static "img/moon.jpg" %}" class="img-resize" alt = "">
 {% endblock %}
 
-{% block pageName %} <h3 class="titles-mr">Hot questions</h3>{% endblock %}
+{% block pageName %} <h3 class="titles-mr">Questions</h3>{% endblock %}
 
 {% block content %}
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'base_questions' %}">New</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="#">Hot</a>
+  </li>
+</ul>
+<p>
 {% for question in questions %}
 <div>
 	<div class="row question-block">

@@ -1,9 +1,18 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block pageName %} <h3 class="titles-mr">New questions </h3>{% endblock %}
+{% block pageName %} <h3 class="titles-mr">Questions</h3>{% endblock %}
 
 {% block content %}
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" href="{% url 'base_questions' %}">New</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'hot_questions' %}">Hot</a>
+  </li>
+</ul>
+<p>
 {% for question in questions %}
 <div>
 	<div class="row question-block">
