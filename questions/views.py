@@ -34,10 +34,13 @@ def hot(request):
 		})
 
 def tag(request, tag_name):
-    return render(request, 'tagQuestion.html', {
-    	'page_alias': 'tag',
-    	'tag_name' : tag_name
-    	})
+	questions_list = Question.objects.byTag(tag_name)
+	questions, page = paginating(questions_list, request)
+	return render(request, 'tagQuestion.html', {
+		'questions': questions,
+		'page_alias': 'tag',
+		'tag_name': tag_name #to show in tag page
+		})
     #res = render ...
     #return HttpResponse(res)
 def question(request, question_id):

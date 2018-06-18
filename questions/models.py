@@ -17,9 +17,12 @@ class QuestionManager(models.Manager):
 		return self.annotate(number_of_answers = Count('answer')).order_by('-rating')
 
 	def withId(self, _id):
-		return get_object_or_404(self, pk = _id)
+		return get_object_or_404(self, pk = _id) #only for 1 object!
 
-	#def search
+	def byTag(self, _tag):
+		self = self.filter(tags__name =_tag)
+		return self.annotate(number_of_answers = Count('answer')).order_by('-rating')
+
 class TagsManager(models.Manager):
 	def newest_by_tag(self, _tag):
 		return get_object_or_404(self, name = _tag).questions.all().order_by('creationTime')
@@ -86,7 +89,7 @@ class Question(models.Model):
 															self.slug])
 	#assigning proper name to model objects (for admin panel)
 	def __str__(self):
-		return self.title
+		return (self.title, self.tags.name)
 
 	class Meta:
 		ordering = ['-creationTime']

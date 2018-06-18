@@ -23,7 +23,7 @@
 		<p> {{ question.text }} </p>
 		<i>Tags: 
 			{% for tag in question.tags.all %}				
-				<a style="margin-right:10px" href="">{{ tag.name }}</a>
+				<a style="margin-right:10px" href="{% url 'tag_questions' tag_name=tag.name %}">{{ tag.name }}</a>
 			{% endfor %}
 		</i>
 		<p align="right"><font size="2"> Rating: {{question.rating}} <br>

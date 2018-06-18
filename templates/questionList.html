@@ -31,7 +31,7 @@
 				Tags: 			
 				{% for tag in question.tags.all %}
 					<!--<a href="{% url 'tag_questions' tag.name }">{{ tag.name }}</a>-->
-					<a style="margin-right:10px" href="">{{ tag.name }}</a>
+					<a style="margin-right:10px" href="{% url 'tag_questions' tag_name=tag.name %}">{{tag.name}}</a>
 				{% endfor %}
 				<p align="right"><font size="2"> Asked {{question.creationTime}}</font></p>
 			</p>
