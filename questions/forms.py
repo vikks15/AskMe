@@ -47,17 +47,17 @@ class SignInForm(AuthenticationForm):
 			'placeholder': 'Login'
 		}))
 	password = forms.CharField(
-		widget=forms.TextInput ( attrs = {
+		widget=forms.PasswordInput ( attrs = {
 			'class': 'form-control',
 			'placeholder': 'Password'
 		}))
 
-	def clean_username(self):
-		data = self.cleaned_data.get('username')
-		if Profile.objects.filter(username=data).first() is None:
-			raise ValidationError('User does not exist.')
-		else:
-			return data;
+	#def clean_username(self):
+	#	data = self.cleaned_data.get('username')
+	#	if Profile.objects.filter(user = data).first() is None:
+	#		raise ValidationError('User does not exist.')
+	#	else:
+	#		return data;
 
 	class Meta:
 		model = Profile

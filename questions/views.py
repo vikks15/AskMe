@@ -4,12 +4,11 @@ from .models import Question, Answer
 from django.views.generic import ListView
 
 from django.urls import reverse 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from questions.forms import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.csrf import csrf_protect
 
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import redirect
 # Create your views here.
 
@@ -101,12 +100,25 @@ def ask(request):
 		'page_alias': 'ask',
 		'user_profile': user_profile,
 		})
-
-
-
-
+	
+@csrf_protect
 def signIn(request):
-	user_profile = Profile.objects.getProfile(request.user)
+	if request.POST:
+		username = request.POST['username']
+		password = request.POST['password']
+		form = SignInForm(data=request.POST)
+		user = authenticate(username = username, password = password)
+		if user is not None:
+			#login the user
+			login(request, user)
+			return redirect('base_questions')
+	else:
+		form = SignInForm()
+	return render(request, 'login.html', {
+		'form': form,
+		})
+
+"""def another way to sign in (request):
 	if request.POST:
 		form = AuthenticationForm(data=request.POST)
 		if form.is_valid():
@@ -118,11 +130,12 @@ def signIn(request):
 		form = AuthenticationForm()
 	return render(request, 'login.html', {
 		'form': form,
-		'user_profile': user_profile,
-		})
+		})"""
 
-def logout(request):
-	return redirect(reverse('index'))
+def logout_view(request):
+	logout(request)
+	#return redirect(reverse('index'))
+	return redirect('base_questions')
 
 def signUp(request):
 	return render(request, 'signup.html', {

@@ -31,100 +31,10 @@
 		<div class="col-md-9">
 			{% block pageName %} <h3 class="titles-mr">Questions </h3>{% endblock %}
 
-			{% block content %}
-			<div class="row question-block">
-				<div class="col-md-2"> 
-					<img src="{% static "img/cat2.jpeg" %}" alt = "" class="avatar-img">
-					<form>
-						<div class="form-group row">
-							<label class="col-sm-5 col-form-label">Like</label>
-							<div class="col-sm-3">
-								<input type="number" min="0" max="50" step="1" value="2" size="6">
-							</div>
-						</div>
-					</form>
-				</div>
-				<div class="col-md-10">
-					<h4><a href="{% url 'question_page' question_id=1 %}">Question 1 {{question_id}} </a></h4>
-					<p>Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with padding-top: 60px; on the body > .container. Back to the default sticky footer minus the navbar.</p>
-					<p>
-						<a style="margin-right:20px" href="">answers(3)</a>
-						Tags: <a href="">Moon</a>
-						<a href="">Space</a>
-					</p>
-				</div>
-			</div>
+			{% block content %} {% endblock %}
 
-			<div class="row question-block">
-				<div class="col-md-2"> 
-					<img src= "{% static "img/moon.jpg" %}" class="avatar-img" alt="">
-					<form>
-						<div class="form-group row">
-							<label class="col-sm-5 col-form-label">Like</label>
-							<div class="col-sm-3">
-								<input type="number" min="0" max="50" step="1" value="8" size="6">
-							</div>
-						</div>
-					</form>
-				</div>
-				<div class="col-md-10">
-					<h4><a href="{% url 'question_page' question_id=2 %}">Question 2 </a></h4>
-					<p>Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with padding-top: 60px; on the body > .container. Back to the default sticky footer minus the navbar.</p>
-					<p>
-						<a style="margin-right:20px" href="">answers(3)</a>
-						Tags: <a href="">Moon</a>
-						<a href="">Space</a>
-					</p>
-				</div>
-			</div>
-
-			<div class="row question-block">
-				<div class="col-md-2"> 
-					<img src= "{% static "img/flower.jpg" %}" class="avatar-img" alt="">
-					<form>
-						<div class="form-group row">
-							<label class="col-sm-5 col-form-label">Like</label>
-							<div class="col-sm-3">
-								<input type="number" min="0" max="50" step="1" value="6" size="6">
-							</div>
-						</div>
-					</form>
-				</div>
-				<div class="col-md-10">
-					<h4><a href="{% url 'question_page' question_id=3 %}">Question 3 </a></h4>
-					<p>Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with padding-top: 60px; on the body > .container. Back to the default sticky footer minus the navbar.</p>
-					<p>
-						<a style="margin-right:20px" href="">answers(3)</a>
-						Tags: <a href="">Moon</a>
-						<a href="">Space</a>
-					</p>
-				</div>
-			</div>
-			{% endblock %}
-
-			{% block paginator %}
-			<nav aria-label="Page navigation example">
-				<ul class="pagination">
-					<li class="page-item">
-						<a class="page-link" href="#" aria-label="Previous">
-							<span aria-hidden="true">&laquo;</span>
-							<span class="sr-only">Previous</span>
-						</a>
-					</li>
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item">
-						<a class="page-link" href="?page={{ page.next.page_number }}" aria-label="Next">
-							<span aria-hidden="true">&raquo;</span>
-							<span class="sr-only">Next</span>
-						</a>
-					</li>
-				</ul>
-			</nav>
-			{% endblock %}
+			{% block paginator %} {% endblock %}
 			
-
 		</div>
 		<div class="col-md-3 right-column">
 			<h4>Popular Tags</h4>
@@ -154,7 +64,6 @@
 		</div>
 	</div>
 </div> 
-
 
  <footer class="footer">
  	<div class="container">

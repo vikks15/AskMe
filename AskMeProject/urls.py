@@ -28,6 +28,7 @@ urlpatterns = [
     path('settings/<slug:user_name>/', views.settings, name='settings'),
     path('signin/', views.signIn, name='signin'),
     path('question/<int:question_id>/', views.question, name='question_page'),
+    path('logout/', views.logout_view, name='logout'),
 
     
     #path('questions/', include('questions.urls', namespace='questions')),
