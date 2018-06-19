@@ -7,7 +7,7 @@
 <img src="{% static "img/moon.jpg" %}" class="img-resize" alt = "">
 {% endblock %}
 
-<h3 class="titles-mr">{% block pageName %}Settings: Mr. Smith{% endblock %}</h3>
+{% block pageName %}<h3 class="titles-mr">Settings: {{user}}</h3>{% endblock %}
 {% block content %}
 <p class="form-error"></p>
 <form>

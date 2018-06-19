@@ -16,7 +16,8 @@
 	{% else %}
 	<li class="nav-item">
 	{% endif %}
-		<a class="nav-link" href="{% url 'tag_questions' tag_name='all' %}">Tags</a>
+		<!--a class="nav-link" href="{% url 'tag_questions' tag_name='all' %}">Tags</a>-->
+		<a class="nav-link" href="{% url 'all_tags'%}">Tags</a>
 	</li>
 
 	{% if page_alias == "ask" %}

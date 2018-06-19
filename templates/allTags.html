@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+
+<title>{% block title %}Tags{% endblock %}</title>
+
+{% block pageName %} <h3 class="titles-mr">Tags</h3>{% endblock %}
+
+{% block content %}
+
+<ul class="list-group">
+	{% for tag in tags %}
+		<a href="{% url 'tag_questions' tag_name=tag.name %}" class="list-group-item list-group-item-action">
+    		{{tag}}
+  		</a>
+  {% endfor %}
+</ul>
+
+{% endblock %}

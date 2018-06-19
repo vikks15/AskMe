@@ -40,6 +40,18 @@ def hot(request):
 		'user_profile': user_profile,
 		})
 
+
+def all_tags_view(request):
+	user_profile = Profile.objects.getProfile(request.user)
+	tags_list = Tag.objects.all()
+	#allTags, page = paginating(tags_list, request)
+	return render(request, 'allTags.html', {
+		'tags': tags_list,
+		'page_alias': 'allTags',
+		'user_profile': user_profile,
+		})
+
+
 def tag(request, tag_name):
 	questions_list = Question.objects.byTag(tag_name)
 	questions, page = paginating(questions_list, request)
