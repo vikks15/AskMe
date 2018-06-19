@@ -9,6 +9,14 @@ from django.urls import reverse
 from django.db.models import Count
 # Create your models here.
 
+class ProfileManager(models.Manager):
+	def getProfile(self, _uname):
+		if _uname.id != None: #anonymous user chaeck 
+			pr = get_object_or_404(self, user = _uname)
+		else:
+			pr = 'None'
+		return pr
+
 class QuestionManager(models.Manager):
 	def newest(self):
 		return self.annotate(number_of_answers = Count('answer'))
@@ -44,6 +52,7 @@ class Profile(models.Model):
 	)
 	user = models.OneToOneField(User, on_delete = models.CASCADE)
 	rating = models.IntegerField(default=0)
+	objects = ProfileManager()
 
 	def __str__(self):
 		return self.user.username

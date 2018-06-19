@@ -33,8 +33,27 @@
 	<button class="btn search-button my-2 my-sm-0" type="submit">Search</button>
 </form>
 
+{% if user.is_authenticated %}
 
-{% if page_alias == "tag" or page_alias == "" or page_alias == "signIn" or page_alias == "signUp" %}
+<ul class="navbar-nav">
+	{% if page_alias == "settings" %}
+	<li class="nav-item active">
+	{% else %}
+	<li class="nav-item">
+	{% endif %}
+		<a class="nav-link" href="{% url 'settings' user_name='Mr_Smith' %}">Settings</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="">Log out</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="">{{user}}</a>
+	</li>
+</ul>
+
+<img src="/{{user_profile.avatar.url}}" class="img-resize" alt = "">
+
+{% else %}
 <ul class="navbar-nav">
 	{% if page_alias == "signIn" %}
 	<li class="nav-item active">
@@ -50,23 +69,6 @@
 	<li class="nav-item">
 	{% endif %}
 		<a class="nav-link" href="{% url 'signup' %}">Register</a>
-	</li>
-</ul>
-{% else %}
-
-<ul class="navbar-nav">
-	{% if page_alias == "settings" %}
-	<li class="nav-item active">
-	{% else %}
-	<li class="nav-item">
-	{% endif %}
-		<a class="nav-link" href="{% url 'settings' user_name='Mr_Smith' %}">Settings</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="">Log out</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="">{{user}}</a>
 	</li>
 </ul>
 
