@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from questions.forms import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import redirect
 # Create your views here.
@@ -56,19 +57,22 @@ def question(request, question_id):
 	answers = Answer.objects.hottest(question_id)
 	user_profile = Profile.objects.getProfile(request.user)
 	page = paginating(answers, request)
-	form = AnswerForm()
 
-	if request.method == "POST":
-		form = AnswerForm(request.POST) #binding data to the form
-		if form.is_valid():
-			answer = form.save(commit=False)
-			answer.author = request.user.profile
-			answer.question = question
-			answer.save()
-			#page_number = answer.get_page()
-			return redirect('/question/' + str(question_id), pk=answer.pk)
+	#if request.user.is_authenticated():
+	if request.user.id != None:
+		if request.method == "POST":
+			form = AnswerForm(request.POST) #binding data to the form
+			if form.is_valid():
+				answer = form.save(commit=False)
+				answer.author = request.user.profile
+				answer.question = question
+				answer.save()
+				#page_number = answer.get_page()
+				return redirect('/question/' + str(question_id), pk=answer.pk)
+		else:
+			form = AnswerForm()
 	else:
-		form = AnswerForm()
+		form = 'empty'
 
 	context = {
 	'question': question, 
@@ -79,6 +83,7 @@ def question(request, question_id):
 	}
 	return render(request, "question.html", context)
 
+@login_required(login_url='signin')
 def ask(request):
 	user_profile = Profile.objects.getProfile(request.user)
 #	form = AskForm(request.POST or None)
@@ -100,7 +105,7 @@ def ask(request):
 		'page_alias': 'ask',
 		'user_profile': user_profile,
 		})
-	
+
 @csrf_protect
 def signIn(request):
 	if request.POST:
@@ -111,11 +116,15 @@ def signIn(request):
 		if user is not None:
 			#login the user
 			login(request, user)
-			return redirect('base_questions')
+			if 'next' in request.POST: #getting next from url in login.html
+				return redirect(request.POST.get('next'))
+			else:
+				return redirect('base_questions')
 	else:
 		form = SignInForm()
 	return render(request, 'login.html', {
 		'form': form,
+		'page_alias': 'signIn'
 		})
 
 """def another way to sign in (request):

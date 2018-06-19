@@ -7,9 +7,17 @@
 {% block content %}
 
 <form method="POST" class="post-form">
+	{% if request.GET.next %}
+    	{% if request.GET.next == "/ask/" %}
+    		<p class="form-error">You need to login first!</p>
+   		{% endif %}
+    	<input type="hidden" name="next" value="{{request.GET.next}}">
+    {% endif %}
+
     {% csrf_token %}
     {{ form.as_p }}
-    <div class="col-sm-3">
+    <!--div class="col-sm-3"-->
+    <div>
 		<button type="submit" class="btn my-btn">Log In</button>
 	</div>
 </form>

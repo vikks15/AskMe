@@ -57,7 +57,7 @@
 	</div>
 	<div class="col-md-10">
 		{% if ans.title %}
-		<h4>{{ans.title}}</h4>
+			<h4>{{ans.title}}</h4>
 		{% endif %}
 		<p>{{ans.text}}</p>
 		<p align="right"><font size="2">{{ans.creationTime}}</font></p>
@@ -67,21 +67,20 @@
 
 <hr>
 
-<form>
-	<div class="form-group">
-		<label for="exampleFormControlTextarea1">Write your answer here:</label>
-		<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-	</div>
-</form>
-
+{%if form != 'empty'%}
 <form method="POST" class="post-form">
+	<label for="exampleFormControlTextarea1">Write your answer here:</label>
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Answer" />
+    <!--input type="submit" value="Answer" /> --> 
+    <button type="submit" class="btn my-btn">Answer</button>
 </form>
+{% else %}
+<p>To answer questions you need to be <a href="{% url 'signin' %}?next={{request.path}}">logged in</a></p>
+{% endif %}
 
-<button type="button" class="btn btn-success answer-button">Answer</button>
 {% endblock %}
+
 
 {% block paginator %}
 
