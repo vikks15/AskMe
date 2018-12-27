@@ -67,6 +67,10 @@ class Tag(models.Model):
 	def __str__(self):
 		return self.name
 
+	class Meta:
+		verbose_name = u"Тег"
+		verbose_name_plural = u"Теги"
+
 class Like(models.Model):
 	LIKE = 1
 	DISLIKE = -1

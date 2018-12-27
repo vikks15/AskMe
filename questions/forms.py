@@ -15,13 +15,21 @@ class AskForm(forms.Form):
 			attrs = {'class': 'form-control' }
 			)
 		)
+
 	tags = forms.CharField(
 		widget=forms.Textarea (
 			attrs = {'class': 'form-control' }
 			)
 		)
-	pass
-
+	
+	def clean(self):
+		title = self.cleaned_data.get('title')
+		text = self.cleaned_data.get('text')
+		tags = self.cleaned_data.get('tags')
+		
+		if len(title) > 50:
+			raise ValidationError('Sorry, maximum size of question title is 50 symbols!')
+		return user
 
 class AnswerForm (forms.ModelForm):
 	class Meta:

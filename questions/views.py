@@ -98,22 +98,22 @@ def question(request, question_id):
 @login_required(login_url='signin')
 def ask(request):
 	user_profile = Profile.objects.getProfile(request.user)
-#	form = AskForm(request.POST or None)
-#	if request.POST:
-#		if form is_valid():
-#			question = Question.objects.create (
-#				title = form.cleaned_data.get('title'),
-#				text = form.cleaned_data.get('text'),
-#				author = request.user,
-#				)
-#			return redirect (
-#				reverse(
-#					'question', kwargs={'qid':question.pk} 
-#					) 
-#				)
+	form = AskForm(request.POST or None)
+	
+	if request.POST and form.is_valid():
+		question = Question.objects.create (
+			title = form.cleaned_data.get('title'),
+			text = form.cleaned_data.get('text'),
+			author = user_profile,
+			)
+		return redirect (			
+			'question_page', question_id=question.pk
+			#reverse('question_page', kwargs={'question_id':question.pk})  
+			)
+
 	return render(request, 'ask.html', {
 		'header': 'some text' ,
-		#'form': form ,
+		'form': form,
 		'page_alias': 'ask',
 		'user_profile': user_profile,
 		})

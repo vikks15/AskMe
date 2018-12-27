@@ -12,7 +12,8 @@ class ProfileAdmin(admin.ModelAdmin):
 
 @admin.register(Question)
 class ProfileAdmin(admin.ModelAdmin):
-	pass
+	search_fields = ('title', )
+	list_filter = ('tags', )
 
 @admin.register(Answer)
 class ProfileAdmin(admin.ModelAdmin):
