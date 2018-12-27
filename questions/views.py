@@ -120,24 +120,21 @@ def ask(request):
 
 @csrf_protect
 def signIn(request):
-	if request.POST:
-		username = request.POST['username']
-		password = request.POST['password']
-		form = SignInForm(data=request.POST)
-		user = authenticate(username = username, password = password)
-		if user is not None:
-			#login the user
-			login(request, user)
+	form = SignInForm(data=request.POST or None)
+	if request.POST and form.is_valid():		
+		user = form.login(request) #get user
+		if user:
+			login(request, user) #login user
 			if 'next' in request.POST: #getting next from url in login.html
 				return redirect(request.POST.get('next'))
 			else:
 				return redirect('base_questions')
-	else:
-		form = SignInForm()
+
 	return render(request, 'login.html', {
 		'form': form,
 		'page_alias': 'signIn'
 		})
+
 
 """def another way to sign in (request):
 	if request.POST:

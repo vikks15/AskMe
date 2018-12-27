@@ -1,6 +1,8 @@
 from django import forms
 from .models import *
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import authenticate, login, logout
+from django.core.exceptions import ValidationError
 
 class AskForm(forms.Form):
 	title = forms.CharField(
@@ -52,12 +54,19 @@ class SignInForm(AuthenticationForm):
 			'placeholder': 'Password'
 		}))
 
-	#def clean_username(self):
-	#	data = self.cleaned_data.get('username')
-	#	if Profile.objects.filter(user = data).first() is None:
-	#		raise ValidationError('User does not exist.')
-	#	else:
-	#		return data;
+	def clean(self):
+		username = self.cleaned_data.get('username')
+		password = self.cleaned_data.get('password')
+		user = authenticate(username=username, password=password)
+		if not user or not user.is_active:
+			raise ValidationError('Error in username or password. User does not exist.')
+		return user
+	
+	def login(self, request):
+		username = request.POST['username']
+		password = request.POST['password']
+		user = authenticate(username=username, password=password)
+		return user
 
 	class Meta:
 		model = Profile

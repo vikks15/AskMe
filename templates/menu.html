@@ -11,7 +11,7 @@
 		<a class="nav-link" href="{% url 'base_questions' %}">Questions <span class="sr-only">(current)</span></a>
 	</li>
 
-	{% if page_alias == "tag" %}
+	{% if page_alias == "tag" or page_alias == "allTags" %}
 	<li class="nav-item active">
 	{% else %}
 	<li class="nav-item">
