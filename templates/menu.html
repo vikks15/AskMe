@@ -42,7 +42,7 @@
 	{% else %}
 	<li class="nav-item">
 	{% endif %}
-		<a class="nav-link" href="{% url 'settings' user_name='Mr_Smith' %}">Settings</a>
+		<a class="nav-link" href="{% url 'settings' user_name=user_profile.user %}">Settings</a>
 	</li>
 	<li class="nav-item">
 		<a class="nav-link" href="{% url 'logout' %}">Log out</a>

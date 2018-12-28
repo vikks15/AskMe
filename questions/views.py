@@ -99,7 +99,7 @@ def question(request, question_id):
 def ask(request):
 	user_profile = Profile.objects.getProfile(request.user)
 	form = AskForm(request.POST or None)
-	
+
 	if request.POST and form.is_valid():
 		question = Question.objects.create (
 			title = form.cleaned_data.get('title'),
@@ -161,11 +161,29 @@ def signUp(request):
 		'page_alias': 'signUp'
 		})
 
+@csrf_protect
 def settings(request, user_name):
-	user_profile = Profile.objects.getProfile(request.user)
+	userUser = get_object_or_404(User, username = request.user)
+	userProfile = Profile.objects.getProfile(request.user)
+	if request.POST:
+		form1 = SettingsFormUser(request.POST, instance=userUser, prefix='form1')
+		form2 = SettingsFormProfile(request.POST, instance=userProfile, prefix='form2')
+		if form1.is_valid():
+			form1.save()
+			# form2.save()
+			return redirect('base_questions')
+	else:
+		form1 = SettingsFormUser(initial={
+			'username': request.user,
+			'email': request.user.email,
+			#'rating': me.rating
+		}, prefix='form1')
+		form2 = SettingsFormProfile(prefix='form2')
 	return render(request, 'mysettings.html', {
+		'form1': form1,
+		'form2': form2,
 		'page_alias': 'settings',
-		'user_profile': user_profile,
+		'user_profile': userProfile,
 		})
     #res = render(request, 'mysettings.html')
     #return HttpResponse(res)
