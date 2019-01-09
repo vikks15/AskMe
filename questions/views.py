@@ -9,6 +9,7 @@ from questions.forms import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 
 from django.shortcuts import redirect
 # Create your views here.
@@ -155,11 +156,23 @@ def logout_view(request):
 	#return redirect(reverse('index'))
 	return redirect('base_questions')
 
+@csrf_protect
 def signUp(request):
+	form = UserCreationForm()
+
+	if request.method == 'POST':
+		form = UserCreationForm(request.POST)
+		if form.is_valid():			
+			createdUser = form.save()
+			profile = Profile.objects.create (
+				user = createdUser
+			)
+			return redirect('signin')
+		
 	return render(request, 'signup.html', {
-		'header': 'some text',
-		'page_alias': 'signUp'
-		})
+		'page_alias': 'signUp',
+		'form': form
+	})
 
 @csrf_protect
 def settings(request, user_name):

@@ -95,11 +95,6 @@ class RegisterForm(forms.Form):
 			attrs = {'class': 'form-control' }
 			)
 		)
-	nickname = forms.CharField(
-		widget=forms.TextInput (
-			attrs = {'class': 'form-control' }
-			)
-		)
 	password = forms.CharField(
 		widget=forms.TextInput (
 			attrs = {'class': 'form-control' }
@@ -110,9 +105,7 @@ class RegisterForm(forms.Form):
 			attrs = {'class': 'form-control' }
 			)
 		)
-	#avatar
 
-	pass
 
 class SettingsFormUser(forms.ModelForm):
 	class Meta:
