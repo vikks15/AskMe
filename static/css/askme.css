@@ -121,3 +121,7 @@ code {
 .my-btn:hover {
      background: #c3b7de;
 }
+
+.paginator-btn {
+    color: white !important;
+}

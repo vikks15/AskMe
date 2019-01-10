@@ -13,52 +13,77 @@
   </li>
 </ul>
 <p>
-{% for question in questions %}
-<div>
-	<div class="row question-block">
-		<div class="col-md-2"> 
-			<img src="{{question.author.avatar.url}}" alt = "" class="avatar-img">
-			<p><b><i>{{question.author.user}}</i></b></p>
-			<form>
-				<div class="form-group row">
-					<label class="col-sm-5 col-form-label">Like</label>
-					<div class="col-sm-3">
-						<input type="number" min="0" max="50" step="1" value="2" size="6">
-					</div>
-				</div>
-			</form>
-		</div>
-		<div class="col-md-10">
-			<h4><a href="{% url 'question_page' question.id %}"> {{ question.title }} </a></h4>
-				<div>
-					{{ question.text|safe|truncatewords:"50"|linebreaks }}
-				</div>
-				<div>{{ page.number }}</div>
 
-				<p><i>Rating: {{question.rating}}</i></p> 
-				<a style="margin-right:20px" href="{% url 'question_page' question.id %}">Answers ({{question.number_of_answers}})</a>
-				Tags: 			
-				{% for tag in question.tags.all %}
-					<!--<a href="{% url 'tag_questions' tag.name }">{{ tag.name }}</a>-->
-					<a style="margin-right:10px" href="{% url 'tag_questions' tag_name=tag.name %}">{{tag.name}}</a>
-				{% endfor %}
-				<p align="right"><font size="2"> Asked {{question.creationTime}}</font></p>
-			</p>
+<div id="questions_list">
+	{% for question in questions %}
+	<div>
+		<div class="row question-block">
+			<div class="col-md-2"> 
+				<img src="{{question.author.avatar.url}}" alt = "" class="avatar-img">
+				<p><b><i>{{question.author.user}}</i></b></p>
+				<form>
+					<div class="form-group row">
+						<label class="col-sm-5 col-form-label">Like</label>
+						<div class="col-sm-3">
+							<input type="number" min="0" max="50" step="1" value="2" size="6">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-md-10">
+				<h4><a href="{% url 'question_page' question.id %}"> {{ question.title }} </a></h4>
+					<div>
+						{{ question.text|safe|truncatewords:"50"|linebreaks }}
+					</div>
+					<div>{{ page.number }}</div>
+
+					<p><i>Rating: {{question.rating}}</i></p> 
+					<a style="margin-right:20px" href="{% url 'question_page' question.id %}">Answers ({{question.number_of_answers}})</a>
+					Tags: 			
+					{% for tag in question.tags.all %}
+						<!--<a href="{% url 'tag_questions' tag.name }">{{ tag.name }}</a>-->
+						<a style="margin-right:10px" href="{% url 'tag_questions' tag_name=tag.name %}">{{tag.name}}</a>
+					{% endfor %}
+					<p align="right"><font size="2"> Asked {{question.creationTime}}</font></p>
+				</p>
+			</div>
 		</div>
 	</div>
+	{% endfor %}
 </div>
-{% endfor %}
 {% endblock %}
 
 {% block paginator %}
+<div id="paginator">
+	{% for page in questions.paginator.page_range %}
+	{% if page == questions.number %}
+		<a type="button" class="btn btn-dark active paginator-btn" id="{{page}}">{{ page }}</a>
+	{% else %}
+		<a type="button" class="btn btn-dark paginator-btn" id="{{page}}">{{ page }}</a>
+	{% endif %}
+	{% endfor %}
+</div>
 
-{% for page in questions.paginator.page_range %}
-{% if page == questions.number %}
-	<a href="?page={{ page }}" type="button" class="btn btn-dark active">{{ page }}</a>
-{% else %}
-	<a href="?page={{ page }}" type="button" class="btn btn-dark">{{ page }}</a>
-{% endif %}
-{% endfor %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("#paginator a").click(function(){
+		var pageNum = this.id;
+		$("#paginator a").removeClass("active");
+		$(this).addClass("active");
+		$.ajax({
+			type:"GET",
+			data:"page="+pageNum,
+			async: false,
+			success: function(data){				
+				newList = $(data).find("#questions_list");
+				$("#questions_list").html(newList);	
+				window.scrollTo(0, 0);
+			}
+		});
+	});
+});
+</script>
 <p> </p>
 {% endblock %}
 
