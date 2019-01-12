@@ -8,14 +8,47 @@
 {% block content %}
 <div class="form-error">{{ Form.errors.as_data }}</div>
 
-<form novalidate name="ask-form" class="post-form" onsubmit="return validateForm()" method="POST">
+<form novalidate name="ask-form" id="askForm" class="post-form" method="POST">
 	{% csrf_token %}
 	{{ form.as_p }}
 	<div>
-		<button type="submit" class="btn my-btn">Ask!</button>
+		<button type="submit" class="btn my-btn" id="mySubmitButton">Ask!</button>
 	</div>
 	<script src="{% static 'js/formValidation.js' %}"></script>
 </form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+	$("#askForm").submit(function(e){
+		let validForm = validateForm();
+		let xhr = new XMLHttpRequest(); //to get url after redirect
+		let form = $(this);
+		let url = form.attr('action');
+
+		if(validForm) {
+			$.ajax({
+				type: "POST",
+				url: url,
+				data: form.serialize(), // serializes the form's elements.
+
+				xhr: function() {
+					return xhr;
+				},
+
+				success: function(data)
+				{
+					form[0].reset();			   
+					newQuestion = $(data).find(".col-md-9");
+					$(".col-md-9").replaceWith(newQuestion);
+					window.history.pushState(null, "", xhr.responseURL);
+					alert("New question has been added.");
+				}
+			});
+		}
+		e.preventDefault(); //prevent default form submit
+	});
+</script>
+
 {% endblock %}
 
 {% block paginator %} {% endblock %}

@@ -94,7 +94,7 @@ def question(request, question_id):
 	'form': form,
 	'user_profile': user_profile,
 	}
-	return render(request, "question.html", context)
+	return render(request, 'question.html', context)
 
 @login_required(login_url='signin')
 def ask(request):

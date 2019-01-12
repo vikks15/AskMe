@@ -13,4 +13,5 @@ function validateForm() {
         error[0].textContent = 'Sorry, maximum size of question title is 64 symbols!';
         return false;
     }
+    return true;
 }
