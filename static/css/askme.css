@@ -108,6 +108,8 @@ code {
 
 .form-error {
   color:red;
+  display: block;
+  height: 30px;
 }
 
 .my-btn {

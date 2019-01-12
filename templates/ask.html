@@ -6,16 +6,16 @@
 {% block pageName %} <h3 class="titles-mr">Ask question</h3>{% endblock %}
 
 {% block content %}
-<p class="form-error">{{ Form.errors.as_data }}</p>
+<div class="form-error">{{ Form.errors.as_data }}</div>
 
-<form method="POST" class="post-form">
+<form novalidate name="ask-form" class="post-form" onsubmit="return validateForm()" method="POST">
 	{% csrf_token %}
 	{{ form.as_p }}
 	<div>
 		<button type="submit" class="btn my-btn">Ask!</button>
 	</div>
+	<script src="{% static 'js/formValidation.js' %}"></script>
 </form>
-
-{% endblock %}	
+{% endblock %}
 
 {% block paginator %} {% endblock %}

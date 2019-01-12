@@ -27,9 +27,10 @@ class AskForm(forms.Form):
 		text = self.cleaned_data.get('text')
 		tags = self.cleaned_data.get('tags')
 		
-		if len(title) > 50:
-			raise ValidationError('Sorry, maximum size of question title is 50 symbols!')
-		return user
+		# if len(title) > 64:
+		# 	raise ValidationError('Sorry, maximum size of question title is 64 symbols!')
+		# return user
+		return
 
 class AnswerForm (forms.ModelForm):
 	class Meta:
